@@ -20,7 +20,7 @@ read the datalogger
 Split the data until keyword PAC and read the 12th element
 - E_PAC=`echo ${RESULT#*PAC} | awk '{print $12}'`
 
-At night no energy is generated, the value you read wil be :, so E_PAC is 0, se the main script
+At night no energy is generated, the value you read wil be :, so E_PAC is 0, see the main script
 This repeats itself 3 times until the yearly energy is measured
 
 Send data to Domoticz
