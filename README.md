@@ -19,10 +19,11 @@ read the datalogger</br>
 
 Split the data until keyword PAC and read the 12th element</br>
 ```E_PAC=`echo ${RESULT#*PAC} | awk '{print $12}'```
-</br>
+
+
 At night no energy is generated, the value you read wil be :, so E_PAC is 0, see the main script</br>
 This repeats itself 3 times until the yearly energy is measured</r>
-</br>
+
 Send data to Domoticz</br>
 ```curl --data "type=command&param=udevice&idx=$idxE_PAC&nvalue=0&svalue=$E_PAC" http://$domoticzserverip/json.htm```
 
