@@ -20,17 +20,20 @@ read the datalogger
 
 Split the data until keyword PAC and read the 12th element
 
-```E_PAC=`echo ${RESULT#*PAC} | awk '{print $12}'````
+```E_PAC=`echo ${RESULT#*PAC} | awk '{print $12}'```
 
 At night no energy is generated, the value you read wil be :, so E_PAC is 0, see the main script
 This repeats itself 3 times until the yearly energy is measured
 
 Send data to Domoticz
+
 ```curl --data "type=command&param=udevice&idx=$idxE_PAC&nvalue=0&svalue=$E_PAC" http://$domoticzserverip/json.htm```
 
 I personally like to run the script from crontab to run every minute:
-* crontab -e
+
+```crontab -e```
 
 send it to the null device otherwise you mail system might get an email every minute
+
 ```*/1 * * * * /home/pi/datalogger.sh > /dev/null 2>&1```
 
