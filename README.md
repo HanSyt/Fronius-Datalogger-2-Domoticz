@@ -13,20 +13,19 @@ dataloggerip="192.168.2.12" # The IP address of your datalogger
 Basicly thats all Folks
 
 Since my python knowledge is not to good and made the script in simple bash, this is wat is does:
-# read the datalogger
+* read the datalogger
 - RESULT="`wget -qO- http://$dataloggerip/solar_api/GetInverterRealtimeData.cgi?Scope=System`"
 
-# Split the data until keyword PAC and read the 12th element
+* Split the data until keyword PAC and read the 12th element
 - E_PAC=`echo ${RESULT#*PAC} | awk '{print $12}'`
 At night no energy is generated, the value you read wil be :, so E_PAC is 0, se the main script
 This repeats itself 3 times until the yearly energy is measured
 
-# Send data to Domoticz
+* Send data to Domoticz
 - curl --data "type=command&param=udevice&idx=$idxE_PAC&nvalue=0&svalue=$E_PAC" http://$domoticzserverip/json.htm
 
-I personally put the script in crontab to run every minute:
+* I personally put the script in crontab to run every minute:
 crontab -e
-
-# send it to the null device otherwise you mail system might get an email every minute
-*/1 * * * * /home/pi/datalogger.sh > /dev/null 2>&1
+send it to the null device otherwise you mail system might get an email every minute
+- */1 * * * * /home/pi/datalogger.sh > /dev/null 2>&1
 
