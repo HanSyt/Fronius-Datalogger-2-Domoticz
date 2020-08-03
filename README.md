@@ -12,14 +12,13 @@ dataloggerip="192.168.2.12" # The IP address of your datalogger
 
 Basicly thats all Folks
 
-Since my python knowledge is not to good and made the scrip in simple bash, this is wat is does:
+Since my python knowledge is not to good and made the script in simple bash, this is wat is does:
 # read the datalogger
 - RESULT="`wget -qO- http://$dataloggerip/solar_api/GetInverterRealtimeData.cgi?Scope=System`"
 
 # Split the data until keyword PAC and read the 12th element
 - E_PAC=`echo ${RESULT#*PAC} | awk '{print $12}'`
-# at night no energy is generated, the value you read wil be :, so E_PAC is 0
-
+At night no energy is generated, the value you read wil be :, so E_PAC is 0, se the main script
 This repeats itself 3 times until the yearly energy is measured
 
 # Send data to Domoticz
