@@ -26,11 +26,9 @@ This repeats itself 3 times until the yearly energy is measured</r>
 Send data to Domoticz</br>
 ```curl --data "type=command&param=udevice&idx=$idxE_PAC&nvalue=0&svalue=$E_PAC" http://$domoticzserverip/json.htm```
 
-</br>
 I personally like to run the script from crontab to run every minute:</br>
 ```crontab -e```
 
-</br>
 send it to the null device otherwise you mail system might get an email every minute</br>
 ```*/1 * * * * /home/pi/datalogger.sh > /dev/null 2>&1```
 
